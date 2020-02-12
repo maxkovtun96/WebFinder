@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "vis-network@7.3.4",
+      "destination": "wwwroot/vis-network/"
+    }
+  ]
+}
