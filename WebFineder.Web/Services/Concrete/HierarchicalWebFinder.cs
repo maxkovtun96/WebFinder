@@ -47,11 +47,6 @@ namespace WebFineder.Web.Services.Concrete
             {
                 await semaphore.WaitAsync(cancellationToken);
                 nodeQueue.TryDequeue(out FindWordServiceModel curr);
-                if (visitedUrls.Count() + curr.SubNodes.Count() > _webFinderSettings.MaxSites)
-                {
-                    curr.SubNodes = null;
-                    break;
-                }
                 var tasks = curr.SubNodes.Select(chiled => Task.Run(async () =>
                 {
                     try
