@@ -47,18 +47,29 @@ namespace WebFineder.Web.Services.Concrete
             {
                 await semaphore.WaitAsync(cancellationToken);
                 nodeQueue.TryDequeue(out FindWordServiceModel curr);
-                
+                if (visitedUrls.Count() + curr.SubNodes.Count() > _webFinderSettings.MaxSites)
+                {
+                    curr.SubNodes = null;
+                    break;
+                }
                 var tasks = curr.SubNodes.Select(chiled => Task.Run(async () =>
                 {
                     try
                     {
-                        if (visitedUrls.ContainsKey(chiled.SiteUrl) || visitedUrls.Count() > _webFinderSettings.MaxSites)
+                        if (visitedUrls.ContainsKey(chiled.SiteUrl) 
+                        || visitedUrls.Count() > _webFinderSettings.MaxSites)
                         {
                             chiled = null;
                             return;
                         }
                         nodeQueue.Enqueue(chiled);
                         await EnrichNode(chiled, word);
+                        nodeQueue.TryDequeue(out FindWordServiceModel curr);
+                        if (visitedUrls.Count() > _webFinderSettings.MaxSites)
+                        {
+                            chiled = null;
+                            return;
+                        }
                         visitedUrls.AddOrUpdate(chiled.SiteUrl, chiled.SiteUrl, (_, old) => old);
                     }
                     catch (Exception ex)

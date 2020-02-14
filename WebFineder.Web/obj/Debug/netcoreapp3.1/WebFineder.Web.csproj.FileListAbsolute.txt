@@ -15,7 +15,6 @@ C:\Users\maksim.kovtun\source\repos\WebFineder\WebFineder.Web\obj\Debug\netcorea
 C:\Users\maksim.kovtun\source\repos\WebFineder\WebFineder.Web\obj\Debug\netcoreapp3.1\WebFineder.Web.TagHelpers.output.cache
 C:\Users\maksim.kovtun\source\repos\WebFineder\WebFineder.Web\obj\Debug\netcoreapp3.1\WebFineder.Web.RazorCoreGenerate.cache
 C:\Users\maksim.kovtun\source\repos\WebFineder\WebFineder.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-C:\Users\maksim.kovtun\source\repos\WebFineder\WebFineder.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\maksim.kovtun\source\repos\WebFineder\WebFineder.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\maksim.kovtun\source\repos\WebFineder\WebFineder.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\maksim.kovtun\source\repos\WebFineder\WebFineder.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs

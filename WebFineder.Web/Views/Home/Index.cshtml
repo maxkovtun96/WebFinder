@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
     <style type="text/css">
-        #mynetwork {
+        #graph-container-id {
             margin: 0px auto;
             width: 800px;
             height: 800px;
@@ -18,74 +18,12 @@
         <div id="loader-id" class="spinner-border" role="status" style="display:none">
             <span class="sr-only">Loading...</span>
         </div>
-        <div id="mynetwork"></div>
+        <div id="graph-container-id"></div>
     </div>
 
 @section Scripts{
     <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
-    <script>
-        function onFetchFindResponse(data) {
-            var nodes = [];
-            var edges = [];
-            function recursive(node, prevNodeId) {
-                var nodeId = nodes.length + 1;
-                nodes.push({
-                    id: nodeId,
-                    label: `${node.siteUrl} (${node.wordsCount})`,
-                    value: node.wordsCount
-                });
-                if (nodeId > 1) edges.push({ from: prevNodeId, to: nodeId });
-                $(node.subNodes).each(function (i, subNode) {
-                    recursive(subNode, nodeId);
-                });
-            }
-            recursive(data, 0);
-            var nodesDS = new vis.DataSet(nodes);
-            var edgesDS = new vis.DataSet(edges);
-            var container = document.getElementById('mynetwork');
-            var graphs = { nodes: nodesDS, edges: edgesDS };
-            
-            var network = new vis.Network(container, graphs, options);
-        }
-
-        function onSubmitHandler(e) {
-            e.preventDefault();
-            let requiredParams = {
-                url: $("#url-id").val(),
-                word: $("#word-id").val()
-            };
-            $('#loader-id').show();
-            $.get("@Url.Action("Find","Home")", requiredParams, onFetchFindResponse)
-                .done(function () {
-                    $('#loader-id').hide();
-                });
-        }
-
-        function onDocReadyHandler() {
-            $("#findWord-form-id").submit(onSubmitHandler);
-        }
-
-        $(document).ready(onDocReadyHandler);
-
-        var options = {
-                nodes: {
-                  shape: "dot",
-                  scaling: {
-                    customScalingFunction: function(min, max, total, value) {
-                      return value / total;
-                    },
-                    min: 5,
-                    max: 50
-                  }
-                },
-                edges: {
-                    arrows: {
-                        to: {
-                            enabled: true,
-                            scaleFactor: 1
-                        }
-                    }
-                }
-              };
-    </script>
+    <script>var findUrl = '@Url.Action("Find","Home")'</script>
+    <script src="~/js/visOptions.js"></script>
+    <script src="~/js/main.js"></script>
 }
